@@ -1,19 +1,23 @@
 import React, {Component} from 'react';
 import {FormGroup, FormControl,InputGroup,Glyphicon} from 'react-bootstrap';
 import Profile from './Profile';
+import Gallery from './Gallery';
 
 class App extends Component{
   constructor(props){
     super(props);
     this.state = {
       searchText: '',
-      artist: null
+      artist: null,
+      tracks: []
     };
     this.search = this.search.bind(this);
   }
   search(){
     const ROOT_URL = 'https://api.spotify.com/v1/search';
-    const FETCH_URL = `${ROOT_URL}?q=${this.state.searchText}&type=artist&limit=1`;
+    let FETCH_URL = `${ROOT_URL}?q=${this.state.searchText}&type=artist&limit=1`;
+    const ALBUM_URL = 'https://api.spotify.com/v1/artists/';
+
     fetch(FETCH_URL, {
       method: 'GET'
     })
@@ -21,7 +25,18 @@ class App extends Component{
     .then(json => {
       const artist = json.artists.items[0];
       this.setState({artist});
-      console.log(this.state.artist);
+
+      FETCH_URL = `${ALBUM_URL}${artist.id}/top-tracks?country=US&`;
+      fetch(FETCH_URL, {
+        method: 'GET'
+      })
+      .then(response => response.json())
+      .then(json => {
+        const tracks = json.tracks;
+        this.setState({
+          tracks
+        })
+      })
     })
 
   }
@@ -49,13 +64,19 @@ class App extends Component{
             </InputGroup.Addon>
           </InputGroup>
         </FormGroup>
+        {
+          this.state.artist
+          ? <div>
+              <Profile
+                artist={this.state.artist}
+              />
+              <Gallery
+                tracks={this.state.tracks}
+              />
+            </div>
+          : <div></div>
+        }
 
-        <Profile
-          artist={this.state.artist}
-        />
-        <div className='gallery'>
-          Gallery
-        </div>
       </div>)
   }
 }

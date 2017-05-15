@@ -9,3 +9,96 @@ body {
 .app{
   padding: 20px;
 }
+
+
+/*Profile*/
+
+.profile {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.profile img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #51adad;
+}
+
+.profile_info{
+  margin-left: 20px;
+  text-align: left;
+}
+
+.profile_name{
+  font-size: 28px;
+  margin-top: 10px;
+}
+
+.profile_foll{
+  color: #51adad;
+  font-size: 18px;
+}
+
+.track{
+  display: inline-block;
+  width: 220px;
+  height: 220px;
+  cursor: pointer;
+  position: relative;
+  margin: 10px;
+  text-align: center;
+}
+.track:hover h3{
+  opacity: 1;
+}
+
+.track h3{
+  font-size: 13px;
+  background-color: #111;
+  opacity: 0.75;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  width: 214px;
+  left: 3px;
+  padding: 8px;
+  transition: all .2s ease;
+}
+
+.track_image{
+  position: absolute;
+  width: 220px;
+  border: 3px solid #51adad;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+
+.track_play_wrap{
+  background-color: #fff;
+  border-radius: 50%;
+  color: #000;
+  position: absolute;
+  padding-top: 10px;
+  padding-left: 1px;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  left: 50%;
+  top: 50%;
+  margin-left: -20px;
+  margin-top: -20px;
+  opacity: 0;
+  transition: all .2s ease;
+}
+
+.track_play_wrap:hover{
+  opacity: 0.8;
+}
